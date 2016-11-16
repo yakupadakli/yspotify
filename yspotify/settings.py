@@ -37,6 +37,9 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
+    'social.apps.django_app.default',
+    'account.apps.AccountConfig',
     'duplicate_cleaner.apps.DuplicateCleanerConfig',
 )
 
@@ -66,6 +69,10 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                # Setting of Template Context Processors for Social Auth
+                'social.apps.django_app.context_processors.backends',
+                'social.apps.django_app.context_processors.login_redirect',
             ],
         },
     },
@@ -103,6 +110,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
+
+
+AUTHENTICATION_BACKENDS = (
+    # For Spotify Authentication
+    'social.backends.spotify.SpotifyOAuth2',
+    # Default Django Auth Backends
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+SOCIAL_AUTH_SPOTIFY_KEY = ''
+SOCIAL_AUTH_SPOTIFY_SECRET = ''
 
 
 try:
