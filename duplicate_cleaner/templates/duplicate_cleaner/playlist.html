@@ -5,37 +5,43 @@
 {% block content %}
   <div class="text-left">
     <div id="products" class="row list-group">
-      {% for item in playlists.items %}
-        <div class="item  col-xs-3 col-lg-3">
-          <div class="thumbnail">
-            <img class="group list-group-image" src="{{ item.images.0.url }}" alt=""/>
+      {% for item in playlists %}
+        {% if item.owner.id == user.username %}
+          <div class="item  col-xs-12 col-md-4 col-lg-3">
+            <div class="thumbnail">
+              <a href="{% url 'playlist-detail' item.id %}">
+                <img class="group list-group-image" src="{{ item.images.0.url }}" alt=""/>
+              </a>
+              <div class="caption">
+                <h4 class="group inner list-group-item-heading">
+                  {{ item.name|truncatechars:20 }}
+                </h4>
 
-            <div class="caption">
-              <h4 class="group inner list-group-item-heading">
-                {{ item.name|truncatechars:20 }}
-              </h4>
+                <p class="group inner list-group-item-text">
+                  <strong>{% trans "Status" %} : </strong>
+                  {% if item.public %}
+                    {% trans "Public" %}
+                  {% else %}
+                    {% trans "Private" %}
+                  {% endif %}
+                  <br />
+                  <strong>{% trans "Track Count" %} : </strong> {{ item.tracks.total }}
+                </p>
 
-              <p class="group inner list-group-item-text">
-                <strong>{% trans "Status" %} : </strong>
-                {% if item.public %}
-                  {% trans "Public" %}
-                {% else %}
-                  {% trans "Private" %}
-                {% endif %}
-                <br />
-                <strong>{% trans "Track Count" %} : </strong> {{ item.tracks.total }}
-              </p>
-
-              <div class="row">
-                <div class="col-xs-12 col-md-6">
-                  <a class="btn btn-primary" href="{% url 'playlist-detail' item.id %}">
-                    {% trans "Details" %}
-                  </a>
+                <div class="row">
+                  <div class="col-xs-12 col-md-12">
+                    <a class="btn btn-primary btn-sm" href="{% url 'playlist-detail' item.id %}">
+                      {% trans "Details" %}
+                    </a>
+                    <a class="btn btn-danger btn-sm" href="{% url 'playlist-detail' item.id %}">
+                      {% trans "Remove Duplicated Items" %}
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        {% endif %}
       {% endfor %}
     </div>
   </div>

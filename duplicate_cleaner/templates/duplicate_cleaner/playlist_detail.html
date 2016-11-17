@@ -3,43 +3,54 @@
 {% load static %}{% load i18n %}
 
 {% block content %}
-  <div class="text-left">
-    <div id="products" class="row list-group">
-      {% for item in tracks %}
-        <div class="item col-xs-12 col-lg-12 text-left">
-          <div class="thumbnail clearfix">
-            <div class="col-xs-1">
-              <img class="track-image" src="{{ item.track.album.images.0.url }}" alt=""/>
-            </div>
-            <div class="caption col-xs-9">
-              <h4 class="group inner list-group-item-heading">
-                {{ item.track.name }}
-              </h4>
+  <div class="row text-left">
+    <div class="col-xs-12 col-md-6">
+      <a href="{% url 'playlists' %}">
+        <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
+        {% trans "Back to Playlist" %}
+      </a>
+    </div>
+    <div class="col-xs-12 col-md-6 text-xs-center">
+      <a href="{% url 'playlists' %}">
+        <i class="fa fa-trash" aria-hidden="true"></i>
+        {% trans "Remove All Duplicated Items" %}
+      </a>
+    </div>
+  </div>
+  <br />
+  <div class="row">
+    <div class="text-left">
+      <div id="products" class="row list-group">
+        {% for item in tracks %}
+          <div class="item col-xs-12 col-md-12 text-left">
+            <div class="thumbnail clearfix">
+              <div class="col-xs-1">
+                <img class="track-image" src="{{ item.track.album.images.0.url }}" alt=""/>
+              </div>
+              <div class="caption col-xs-12 col-md-5">
+                <h4 class="group inner list-group-item-heading">
+                  {{ item.track.name }}
+                </h4>
 
-              <p class="group inner list-group-item-text">
-                <strong>{% trans "Status" %} : </strong>
-                {% if item.public %}
-                  {% trans "Public" %}
-                {% else %}
-                  {% trans "Private" %}
-                {% endif %}
-                <br />
-                <strong>{% trans "Track Count" %} : </strong> {{ item.tracks.total }}
-              </p>
-            </div>
-            <div class="col-xs-2  track-actions">
-              <button type="button" id="button_play" class="btn btn-success" >
-                <span class="glyphicon glyphicon-pause" aria-hidden="true"></span>
-                {% trans "Play" %}
-              </button>
-              <br />
-              <a class="btn btn-danger btn-sm" href="#">
-                {% trans "Remove" %}
-              </a>
+                <p class="group inner list-group-item-text">
+                  <strong>{% trans "Album" %} : </strong> {{ item.track.album.name }}
+                  <br />
+                  <strong>{% trans "Popularity" %} : </strong> {{ item.track.popularity }}
+                </p>
+              </div>
+              <div class="col-xs-12 col-md-4 track-audio">
+                <audio src="{{ item.track.preview_url }}" id="{{ item.track.id }}" controls></audio>
+              </div>
+              <div class="col-xs-12 col-md-2 track-actions">
+                <button type="button" id="button_delete" class="btn btn-danger btn-sm track-action-button" >
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                  {% trans "Remove" %}
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      {% endfor %}
+        {% endfor %}
+      </div>
     </div>
   </div>
 {% endblock %}

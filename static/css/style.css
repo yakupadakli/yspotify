@@ -105,6 +105,10 @@ body {
   margin-top: 9px !important;
 }
 
-.track-actions a {
+.track-action-button {
   margin-top: 5px;
+}
+
+.track-audio {
+  margin-top: 14px !important;
 }

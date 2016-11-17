@@ -66,6 +66,9 @@
 <div class="container">
 
   <div class="starter-template">
+    {% if messages %}
+      {% include "messages.html" %}
+    {% endif %}
     {% block content %}
     {% endblock %}
   </div>
