@@ -33,7 +33,7 @@
                     <a class="btn btn-primary btn-sm" href="{% url 'playlist-detail' item.id %}">
                       {% trans "Details" %}
                     </a>
-                    <a class="btn btn-danger btn-sm" href="{% url 'playlist-detail' item.id %}">
+                    <a class="btn btn-danger btn-sm" href="{% url 'clean-duplicate' item.id %}">
                       {% trans "Remove Duplicated Items" %}
                     </a>
                   </div>
