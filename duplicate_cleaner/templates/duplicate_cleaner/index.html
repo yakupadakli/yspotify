@@ -1,7 +1,13 @@
 {% extends "base.html" %}
 
+{% load static %}
 {% load i18n %}
 
 {% block content %}
-  Index
+  <h3>
+    {% trans "To access Spotify Duplicate Cleaner and More..." %}
+  </h3>
+  <a href="{% url 'social:begin' 'spotify' %}?next={{ request.path }}" class="btn btn-primary btn-lg" id="login-button" role="button">
+    {% trans 'Sign in with Spotify' %}
+  </a>
 {% endblock %}

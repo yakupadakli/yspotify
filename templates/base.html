@@ -21,11 +21,11 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-              aria-expanded="false" aria-controls="navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
         <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
+      <img src="{% static 'img/Spotify_Icon_RGB_White.png' %}" class="img-rounded logo pull-left">
       <a class="navbar-brand" href="{% url 'index' %}"> {% trans 'YSpotify' %}</a>
     </div>
     {% comment %}<div id="navbar" class="collapse navbar-collapse">
@@ -54,8 +54,8 @@
               {% trans 'Sign in with Spotify' %}
             </a>
           </li>
+          <li><a href="#">{% trans 'Contact' %}</a></li>
         {% endif %}
-        <li><a href="#">{% trans 'Contact' %}</a></li>
       </ul>
     </div>
     <!--/.nav-collapse -->

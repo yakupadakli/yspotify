@@ -119,9 +119,19 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
+SOCIAL_AUTH_SPOTIFY_SCOPE = [
+    'playlist-read-private',
+    'playlist-read-collaborative',
+    'playlist-modify-public',
+    'playlist-modify-private',
+    'user-follow-read',
+    'user-follow-modify',
+]
 SOCIAL_AUTH_SPOTIFY_KEY = ''
 SOCIAL_AUTH_SPOTIFY_SECRET = ''
 
+LOGIN_REDIRECT_URL = "/home/"
+LOGIN_URL = "/"
 
 try:
     from yspotify.local_settings import *

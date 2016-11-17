@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+  <ul>
+    <li>
+      <a href="{% url 'playlists' %}">
+        {% trans "My Playlist" %}
+      </a>
+    </li>
+  </ul>
+{% endblock %}
