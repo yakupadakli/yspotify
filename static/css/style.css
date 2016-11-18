@@ -112,3 +112,9 @@ body {
 .track-audio {
   margin-top: 14px !important;
 }
+.alert {
+  position: absolute;
+  top: 20px;
+  z-index: 100000;
+  right: 100px;
+}

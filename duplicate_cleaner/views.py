@@ -50,7 +50,15 @@ class PlayListView(SpotifyMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(PlayListView, self).get_context_data(**kwargs)
-        context["playlists"] = self.get_playlists(self.request)
+        playlists = self.get_playlists(self.request)
+        for playlist in playlists:
+            if playlist["owner"]["id"] != self.request.user.username:
+                continue
+            tracks = self.get_tracks(self.request, playlist_id=playlist["id"])
+            track_ids = map(lambda x: x["track"]["id"], tracks)
+            duplicate_track_ids = list(set(filter(lambda x: track_ids.count(x) > 1, track_ids)))
+            playlist["duplicate_count"] = len(duplicate_track_ids)
+        context["playlists"] = playlists
         return context
 
 
@@ -77,10 +85,13 @@ class DuplicateCleanerView(SpotifyMixin, RedirectView):
             tracks = self.get_tracks(request, playlist_id=playlist_id)
             track_ids = map(lambda x: x["track"]["id"], tracks)
             duplicate_track_ids = list(set(filter(lambda x: track_ids.count(x) > 1, track_ids)))
-            sp.user_playlist_remove_all_occurrences_of_tracks(request.user.username, playlist_id, duplicate_track_ids)
-            sp.user_playlist_add_tracks(request.user.username, playlist_id, duplicate_track_ids)
+            if duplicate_track_ids:
+                sp.user_playlist_remove_all_occurrences_of_tracks(
+                    request.user.username, playlist_id, duplicate_track_ids
+                )
+                sp.user_playlist_add_tracks(request.user.username, playlist_id, duplicate_track_ids)
+                messages.success(request, ugettext(u"Duplicate Tracks Removed Successfully."))
             return super(DuplicateCleanerView, self).get(request, **kwargs)
         except spotipy.SpotifyException, e:
             messages.warning(request, ugettext(u"The Access Token expired."))
             return redirect("%s?next=/" % reverse("auth:logout"))
-
