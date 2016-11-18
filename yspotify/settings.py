@@ -52,6 +52,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+
+    'account.middleware.ErrorMiddleware',
 )
 
 ROOT_URLCONF = 'yspotify.urls'
@@ -124,8 +126,8 @@ SOCIAL_AUTH_SPOTIFY_SCOPE = [
     'playlist-read-collaborative',
     'playlist-modify-public',
     'playlist-modify-private',
-    'user-follow-read',
-    'user-follow-modify',
+    # 'user-follow-read',
+    # 'user-follow-modify',
 ]
 SOCIAL_AUTH_SPOTIFY_KEY = ''
 SOCIAL_AUTH_SPOTIFY_SECRET = ''
