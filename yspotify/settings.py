@@ -25,7 +25,7 @@ SECRET_KEY = '2(8lhuj=e%_l6q1a^q-19q5ui@v7e#ty*qtj!i0v&bi+y5=k#l'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['yspotify.yakupadakli.com']
 
 
 # Application definition
