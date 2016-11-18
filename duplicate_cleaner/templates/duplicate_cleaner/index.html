@@ -5,8 +5,9 @@
 
 {% block content %}
   <h3>
-    {% trans "To access Spotify Duplicate Cleaner and More..." %}
+    {% trans "Remove duplicated tracks from your playlists and more..." %}
   </h3>
+  <br />
   <a href="{% url 'social:begin' 'spotify' %}?next={{ request.path }}" class="btn btn-primary btn-lg" id="login-button" role="button">
     {% trans 'Sign in with Spotify' %}
   </a>

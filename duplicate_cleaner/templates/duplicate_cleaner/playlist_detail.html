@@ -38,15 +38,15 @@
                   <strong>{% trans "Popularity" %} : </strong> {{ item.track.popularity }}
                 </p>
               </div>
-              <div class="col-xs-12 col-md-4 track-audio">
+              <div class="col-xs-12 col-md-6 track-audio">
                 <audio src="{{ item.track.preview_url }}" id="{{ item.track.id }}" controls></audio>
               </div>
-              <div class="col-xs-12 col-md-2 track-actions">
+              {% comment %}<div class="col-xs-12 col-md-2 track-actions">
                 <button type="button" id="button_delete" class="btn btn-danger btn-sm track-action-button" >
                   <i class="fa fa-trash" aria-hidden="true"></i>
                   {% trans "Remove" %}
                 </button>
-              </div>
+              </div>{% endcomment %}
             </div>
           </div>
         {% endfor %}
